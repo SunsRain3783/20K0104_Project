@@ -4,3 +4,5 @@ nodemon app.js
 
 (Webブラウザにて)
 http://localhost:3000/
+
+# 目標
