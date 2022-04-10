@@ -1,5 +1,6 @@
 ## ローカルサーバーの起動の仕方
 * (管理者コマンドプロンプトにて)
+「cd C:\Program Files\MySQL\MySQL Server 5.7\bin」
 「net start mysql57」
 * (ターミナルにて)
 「nodemon app.js」
@@ -45,7 +46,7 @@ connection.connect((err) => {
 app.listen(3000);
 
 ## MySQLの新規データベースの作り方/編集の仕方
-1. 「管理者」としてターミナルを立ち上げて、「net start mysql57」でMySQLを起動
+1. 「管理者」としてターミナルを立ち上げて、「cd C:\Program Files\MySQL\MySQL Server 5.7\bin」,「net start mysql57」でMySQLを起動
 2. MySQLにログイン「mysql --user=root --password」
 3. （※最初だけ）データベースの作成→「CREATE DATABASE データベース名;」
 4. データベースの選択→「USE データベース名;」
