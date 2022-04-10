@@ -44,7 +44,7 @@ connection.connect((err) => {
 
 app.listen(3000);
 
-## MySQLの新規データベースの作り方
+## MySQLの新規データベースの作り方/編集の仕方
 1. 「管理者」としてターミナルを立ち上げて、「net start mysql57」でMySQLを起動
 2. MySQLにログイン「mysql --user=root --password」
 3. （※最初だけ）データベースの作成→「CREATE DATABASE データベース名;」
