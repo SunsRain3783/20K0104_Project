@@ -14,7 +14,8 @@ http://localhost:3000/
 3. 「git init」
 4. 「git add 〇〇」
 5. 「git commit -m "add"」※メッセージ
-6. 
+6. 「git remote add origin https://github.com/SunsRain3783/20K0104_Project」
+7. 「git push origin master」
 
 ## 目標
 ユーザーのニーズに合わせたランチを提案するウェブアプリ開発
