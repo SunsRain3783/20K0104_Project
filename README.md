@@ -8,6 +8,14 @@
 * (Webブラウザにて)
 http://localhost:3000/
 
+## GitHubのリポジトリにコミットする方法
+1. Git Bashを立ち上げる
+2. 「cd Downloads」,「cd git」
+3. 「git init」
+4. 「git add 〇〇」
+5. 「git commit -m "add"」※メッセージ
+6. 
+
 ## 目標
 ユーザーのニーズに合わせたランチを提案するウェブアプリ開発
 
