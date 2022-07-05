@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>LunCider</title>
+    <link rel="stylesheet" href="/css/stylesheet.css">
+  </head>
+  <body>
+    <%- include('header'); %>
+
+    <div class="main2">
+      <div class="container">
+        <div class="panel2">
+            <h1>マイランチリスト</h1>
+            <ul class="list">
+                <% mylist.forEach((list) => { %>
+                <li>
+                    <h2><%= list.name %></h2>
+                </li>
+                <% }); %>
+            </ul>
+        </div>
+      </div>
+    </div>
+
+    <%- include('footer'); %>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>LunCider</title>
+    <link rel="stylesheet" href="/css/stylesheet.css">
+  </head>
+  <body>
+
+    <div class="login">
+      <div class="container">
+        <div class="panel">
+          <img src="/images/logo.jpg">
+            <% if(errors.length > 0){ %>
+              <ul class="errors">
+                <% errors.forEach(error => { %>
+                  <li><%= error %></li>
+                <% }); %>
+              </ul>
+            <% } %>
+          <form action="/signup" method="post">
+            <ul class="flex-list">
+                <li><input class="textarea" type="text" name="username" placeholder="ユーザ名"></li>
+                <li><input class="textarea" type="password" name="password" placeholder="パスワード"></li>
+                <li><input class="btn2" type="submit" value="新規登録"></li>
+            </ul>
+            <a href="/">トップにもどる</a>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <%- include('footer'); %>
+  </body>
+</html>

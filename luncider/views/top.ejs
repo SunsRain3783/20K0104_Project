@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>LunCider</title>
+    <link rel="stylesheet" href="/css/stylesheet.css">
+  </head>
+  <body>
+    <%- include('header'); %>
+
+    <div class="top-wrapper"><!--背景画像、テキスト-->
+      <div class="container">
+        <h2>LunCiderは、あなたの気分にあった一品料理を提案します</h2>
+      </div>
+    </div>
+    
+    <div class="main"><!--背景画像、条件-->
+      <div class="container">
+        <div class="choice"><!--条件を指定するGUIを設置-->
+          <form method="get" action="/lunch">
+              <b>値段</b><br>
+              <label><input type="radio" name="price" value="0" checked>条件なし</label>
+              <label><input type="radio" name="price" value="2">高い</label>
+              <label><input type="radio" name="price" value="-2">安い</label>
+              <br><br>
+              
+              <b>量</b><br>
+              <label><input type="radio" name="volume" value="0" checked>条件なし</label>
+              <label><input type="radio" name="volume" value="2">ガッツリ</label>
+              <label><input type="radio" name="volume" value="-2">少なめ</label>
+              <br><br>
+              
+              <b>ジャンル</b><br>
+              <label><input type="checkbox" name="genre" value="1" checked>和食</label>
+              <label><input type="checkbox" name="genre" value="2" checked>洋食</label>
+              <label><input type="checkbox" name="genre" value="3" checked>中華</label>
+              <label><input type="checkbox" name="genre" value="4" checked>イタリアン</label>
+              <br><br>
+              <button class="btn" type="submit">この条件で探す</button>
+          </form>
+        </div>
+      </div>
+    </div>
+      
+
+    
+    <%- include('footer'); %>
+  </body>
+</html>

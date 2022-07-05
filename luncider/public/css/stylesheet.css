@@ -1,0 +1,276 @@
+  /*共通部分*/
+  
+  ul{
+    list-style:none;
+  }
+  
+  body {
+    margin: 0;
+    font-family: "Hiragino Kaku Gothic ProN";
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  .container {
+    width: 1170px;
+    padding: 0 15px;
+    margin: 0 auto;
+  }
+
+  header {
+    height: 65px;
+    width: 100%;
+    background-color: rgba(34, 49, 52, 0.7);
+    position:fixed;/*ヘッダーの固定*/
+    top:0;
+    z-index:10;/*要素をトップに*/
+  }
+
+  .logo {
+    padding-top:20px;
+    width: 124px;
+    float:left;
+  }
+
+  header p{
+    padding-left:100px;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+    float:left;
+  }
+
+  header ul{
+    float:right;
+    display:flex;/*リストの横並び*/
+  }
+
+  header li > a{
+    color:white;
+    font-size: 20px;
+    font-weight:bold;
+    margin-right:50px;
+    display:inline-block;
+    padding:5px 0;/*ボタンを押しやすくする*/
+  }
+
+  .main {
+    height:650px;
+    background-image: url(/images/background.jpg);
+    background-size: cover;
+    color: black;
+    text-align: center;
+  }
+
+  footer img {
+    width: 250px;
+    float:left;
+  }
+  
+  footer a {
+    color: #b3aeb5;
+    font-size: 18px;
+    float:right;
+  }
+  
+  footer {
+    padding: 30px 0 80px 0;
+  }
+
+  .btn{
+    cursor:pointer;
+    background: white;
+    border-radius: 50px;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    padding: 10px 50px;
+    color: #313131;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+    font-size:15px;
+    border:2px solid rgba(0,0,0,0.7);
+  }
+  .btn:hover {
+    background: #313131;
+    color: white;
+  }
+  .btn:after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-top: 3px solid #313131;
+    border-right: 3px solid #313131;
+    transform: rotate(45deg) translateY(-50%);
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    border-radius: 1px;
+    transition: 0.3s ease-in-out;
+  }
+  .btn:hover:after {
+    border-color: #FFF;
+  }
+
+  .btn2{/*青色*/
+    cursor:pointer;
+    background: deepskyblue;
+    border-radius: 50px;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 260px;
+    padding: 10px 50px;
+    color: white;
+    font-weight:bold;
+    transition: 0.3s ease-in-out;
+    font-size:18px;
+    border:2px solid deepskyblue;
+  }
+  .btn2:hover {
+    background: white;
+    color: deepskyblue;
+  }
+  .btn2:after {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-top: 3px solid deepskyblue;
+    border-right: 3px solid deepskyblue;
+    transform: rotate(45deg) translateY(-50%);
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    border-radius: 1px;
+    transition: 0.3s ease-in-out;
+  }
+  .btn2:hover:after {
+    border-color: #FFF;
+  }
+
+  /*共通部分ここまで*/
+
+  /*top.ejs*/
+  
+  .top-wrapper {
+    padding: 260px 0 200px 0;
+    background-image: url(/images/food.jpg);
+    background-size: cover;
+    color: white;
+    text-align: center;
+  }
+  
+  .top-wrapper h2 {
+    opacity: 0.6;
+    font-size: 35px;
+    letter-spacing: 5px;
+  }
+
+  .choice{
+    display:inline-block;
+    border-radius:10px;
+    background-color:rgba(255,255,255,0.4);
+    padding:30px 120px;
+    margin-top:100px;
+  }
+
+  .choice b{
+    font-size:24px;
+  }
+
+  .choice label{
+    font-size:20px;
+  }
+
+/*top.ejsここまで*/
+
+/*lunch.ejs*/
+
+.lunch img{
+  width:550px;
+  height:350px;
+  padding-top:80px;
+}
+
+.option{
+  display:flex;
+  justify-content: center;
+}
+
+
+/*lunch.ejsここまで*/
+
+/*login.ejs,signup.ejs*/
+
+.login {
+  height:700px;
+  background-image: url(/images/background.jpg);
+  background-size: cover;
+  color: black;
+  text-align: center;
+  margin:0;
+}
+
+.panel{
+  display:inline-block;
+  border-radius:10px;
+  background-color:rgba(255,255,255,1);
+  padding:80px 0px;
+  margin-top:60px;
+  box-shadow:15px 15px rgba(0,0,0,0.2);
+}
+
+.panel img{
+  padding-bottom:30px;
+}
+
+.flex-list{
+  flex-direction:column;
+  margin-right:30px;
+}
+
+.textarea{
+  font-size:20px;
+  text-align:left;
+  margin-bottom:30px;
+  padding:18px 140px 18px 30px;
+  border-radius:30px;
+  border-color:rgba(0,0,0,0.3);
+}
+
+::placeholder{
+  color:rgba(0,0,0,0.3);
+}
+
+.errors{
+  color:red;
+  text-align:left;
+  list-style:inside;
+}
+
+/*login.ejs,signup.ejsここまで*/
+
+/*list.ejs*/
+
+.panel2{
+  display:inline-block;
+  border-radius:10px;
+  background-color:rgba(255,255,255,1);
+  padding:10px 100px;
+  margin-top:90px;
+  box-shadow:15px 15px rgba(0,0,0,0.2);
+}
+
+.main2 {
+  background-image: url(/images/background.jpg);
+  background-size: cover;
+  color: black;
+  text-align: center;
+  padding-bottom:30px;
+}

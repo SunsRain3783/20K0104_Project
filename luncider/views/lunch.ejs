@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>LunCider</title>
+    <link rel="stylesheet" href="/css/stylesheet.css">
+  </head>
+  <body>
+    <%- include('header'); %>
+
+    <%
+      let Image;
+      if(locals.price == 0 && locals.volume == 0){
+        lunch = lunch[Math.floor(Math.random() * lunch.length)];//価格とボリュームの条件がないならlunchからランダムに取り出す
+        Image = lunch.image;
+      }else{
+        let value;
+        let ValueDct = {};
+        let ValueList = {};
+        let ImageDct = {};
+        let ImageList = {};
+        lunch.forEach((lunch)=>{
+          value = locals.price * lunch.price + locals.volume * lunch.volume;//ポイントの計算
+          ValueDct[lunch.name] = value;
+          ImageDct[lunch.image] = value;
+        });
+        ValueList = Object.keys(ValueDct).map((k)=>({name:k,value:ValueDct[k]}));//辞書から配列に
+        ValueList.sort((a, b) => b.value - a.value);//配列をvalueで降順にソート
+        ImageList = Object.keys(ImageDct).map((k)=>({image:k,value:ImageDct[k]}));//辞書から配列に
+        ImageList.sort((a, b) => b.value - a.value);//配列をvalueで降順にソート
+        lunch = ValueList[locals.index];
+        Image = ImageList[locals.index].image;
+      }
+
+      isAdded = Boolean(false);
+      locals.mylist.forEach((list) => {
+        if(lunch.name == list.name) isAdded = Boolean(true);
+      });
+    %>
+
+    <div class="main">
+        <div class="container">
+            <div class="lunch">
+                <img src="/images/<%= Image %>">
+                <h1><%= lunch.name %></h1>
+                <a href="#">近くのお店を検索する</a>
+            </div>
+            <ul class="option">
+                <% if(locals.isLoggedIn){
+                  if(isAdded){ %>
+                    <li><a href="#" class="btn">マイランチリストに追加済み</a></li>
+                  <% }else{ %>
+                    <form action="/add" method="post">
+                      <li><button type="submit" class="btn" name="name" value=<%= lunch.name %>>マイランチリストに追加する</button></li>
+                    </form>
+                    
+                <% }
+                  }else{ %>
+                  <li><a href="/login" class="btn">マイランチリストに追加する</a></li>
+                <% } %>
+                <li><a href="/lunch" class="btn">他のメニューを表示する</a></li><!--index++-->
+            </ul>
+            
+        </div>
+    </div>
+      
+
+    
+    <%- include('footer'); %>
+  </body>
+</html>
