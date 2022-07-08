@@ -4,10 +4,7 @@
   "description": "",
   "main": "top.js",
   "scripts": {
-    "dev": "node server.js",
-    "build": "next build",
     "heroku-postbuild": "npm run-script build", 
-    "start": "next start -p 8080",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
