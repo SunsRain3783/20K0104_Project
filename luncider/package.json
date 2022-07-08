@@ -2,7 +2,7 @@
   "name": "luncider",
   "version": "1.0.0",
   "description": "",
-  "main": "top.js",
+  "main": "app.js",
   "scripts": {
     "heroku-postbuild": "npm run-script build", 
     "test": "echo \"Error: no test specified\" && exit 1"
