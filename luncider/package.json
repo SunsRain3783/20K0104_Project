@@ -1,8 +1,8 @@
 {
-  "name": "list-app",
+  "name": "luncider",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "top.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
