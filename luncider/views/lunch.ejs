@@ -2,16 +2,24 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LunCider</title>
     <link rel="stylesheet" href="/css/stylesheet.css">
+    <link rel="stylesheet" href="/css/responsive.css">
   </head>
   <body>
     <%- include('header'); %>
 
     <%
-      let Image;
-      if(locals.price == 0 && locals.volume == 0){
-        lunch = lunch[Math.floor(Math.random() * lunch.length)];//価格とボリュームの条件がないならlunchからランダムに取り出す
+      if(locals.name != void 0){
+        lunch.forEach((lunch_)=>{
+          if(lunch_.name == locals.name){
+            lunch = lunch_;
+            Image = lunch.image;
+          }
+        });
+      }else if(locals.price == 0 && locals.volume == 0){
+        lunch = lunch[Math.floor(Math.random() * lunch.length)];//価格とボリュームの条件がなければlunchからランダムに取り出す
         Image = lunch.image;
       }else{
         let value;
@@ -43,24 +51,30 @@
             <div class="lunch">
                 <img src="/images/<%= Image %>">
                 <h1><%= lunch.name %></h1>
-                <a href="#">近くのお店を検索する</a>
-            </div>
-            <ul class="option">
+                <div class="hover">
                 <% if(locals.isLoggedIn){
                   if(isAdded){ %>
-                    <li><a href="#" class="btn">マイランチリストに追加済み</a></li>
-                  <% }else{ %>
-                    <form action="/add" method="post">
-                      <li><button type="submit" class="btn" name="name" value=<%= lunch.name %>>マイランチリストに追加する</button></li>
+                    <form action="/delete" method="post">
+                    <input class="like_2" id="like" type="submit" name="name_from" value="<%= lunch.name %>,lunch"><label for="like"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></label>
                     </form>
-                    
-                <% }
-                  }else{ %>
-                  <li><a href="/login" class="btn">マイランチリストに追加する</a></li>
-                <% } %>
-                <li><a href="/lunch" class="btn">他のメニューを表示する</a></li><!--index++-->
-            </ul>
-            
+                    <% }else{ %>
+                    <form action="/add" method="post">
+                    <input class="like_1" id="like" type="submit" name="name_image" value="<%= lunch.name %>,<%= lunch.image %>"><label for="like"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></label>
+                    </form>
+                    <% }
+                }else{ %>
+                  <input class="like_1" type="submit" id="like"><label for="like"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></label>
+                  <p class="fukidashi">ログインするとマイランチリストに追加できます</p>
+                  <% } %>
+                </div>
+                <ul class="option">
+                    <li><a href="https://www.google.com/search?q=近くの<%= lunch.name %>" class="btn" target="_blank" rel="noopener noreferrer">近くのお店を検索する</a></li>
+                    <li><a href="/lunch" class="btn">他のメニューを表示する</a></li><!--index++-->
+                </ul>
+            </div>
         </div>
     </div>
       

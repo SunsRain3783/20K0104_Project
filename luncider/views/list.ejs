@@ -2,25 +2,36 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LunCider</title>
     <link rel="stylesheet" href="/css/stylesheet.css">
+    <link rel="stylesheet" href="/css/responsive.css">
   </head>
   <body>
     <%- include('header'); %>
 
     <div class="main2">
-      <div class="container">
         <div class="panel2">
-            <h1>マイランチリスト</h1>
-            <ul class="list">
-                <% mylist.forEach((list) => { %>
-                <li>
-                    <h2><%= list.name %></h2>
-                </li>
-                <% }); %>
-            </ul>
+          <div class="like_title">
+            <img src="/images/like.jpg">
+            <p>マイランチリスト</p>
+          </div>
+          
+            <% mylist.forEach((list) => { %>
+              <ul class="list">
+                <li><img class="like_img" src="/images/<%= list.image %>" ></li>
+                <li><h2><%= list.name %></h2></li>
+                    <form action="/delete" method="post">
+                    <div class="hover"><input class="like_2" type="submit" id="like" name="name_from" value="<%= list.name %>,list"><label for="like"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></label></div>
+                    </form>
+                    <a href="https://www.google.com/search?q=近くの<%= list.name %>" class="search" target="_blank" rel="noopener noreferrer">
+                      <div class="search_title">近くのお店を</div>検索<div class="search_title">する</div></a>
+                <br><br><br><br><hr width="95%">
+              </ul>
+            <% }); %>
+
         </div>
-      </div>
     </div>
 
     <%- include('footer'); %>

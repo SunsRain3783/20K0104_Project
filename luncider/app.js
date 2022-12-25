@@ -2,6 +2,7 @@ const express = require('express');
 const mysql = require('mysql');
 const session = require('express-session');
 const app = express();
+const bcrypt = require('bcrypt');
 
 app.use(express.static('public'));//publicにあるファイルを見る
 app.use(express.urlencoded({extended:false}));
@@ -51,7 +52,11 @@ app.get('/lunch', (req, res) => {
     genres = req.query.genre;//二つ以上で配列
     index = -1;
   }
-  index++;
+  if(req.query.ind_flag == void 0){
+    index++;//addかdeleteを通ったあとは増やさない
+  }else{
+    res.locals.name = req.query.name;
+  }
   res.locals.index = index;
   res.locals.price = price;
   res.locals.volume = volume;
@@ -139,19 +144,23 @@ app.post('/login',(req,res,next) => {
 },
 (req,res) => {
   const username = req.body.username;
+  const plain = req.body.password;
 
   connection.query(
     'SELECT * FROM users WHERE username = ?',
     [username],
     (error,results) => {
       if(results.length > 0){
-        if(req.body.password === results[0].password){
-          req.session.userId = results[0].id;
-          req.session.username = results[0].username;
-          res.redirect('/');
-        }else{
-          res.redirect('/login');
-        }
+        const hash = results[0].password;
+        bcrypt.compare(plain, hash, (error, isEqual) =>{
+          if(isEqual){
+            req.session.userId = results[0].id;
+            req.session.username = results[0].username;
+            res.redirect('/');
+          }else{
+            res.redirect('/login');
+          }
+        })
       }else{
         res.redirect('/login');
       }
@@ -205,21 +214,22 @@ app.post('/signup',(req,res,next) => {
 (req,res,next) => {
   const username = req.body.username;
   const password = req.body.password;
-
-  connection.query(
-    'INSERT INTO users (username,password) VALUES (?,?)',
-    [username,password],
-    (error,results) => {
-      req.session.userId = results.insertId;
-      req.session.username = username;
-      next();
-    }
-  )
+  bcrypt.hash(password, 10, (error, hash) =>{
+    connection.query(
+      'INSERT INTO users (username, password) VALUES (?, ?)',
+      [username, hash],
+      (error,results) => {
+        req.session.userId = results.insertId;
+        req.session.username = username;
+        next();
+      }
+    )
+  })
 },
 (req,res) => {
   const listname = req.session.username;
   connection.query(
-    'CREATE TABLE '+ listname +' (name TEXT) DEFAULT CHARSET=utf8;',
+    'CREATE TABLE ' + listname + ' (id INT AUTO_INCREMENT, name TEXT, image TEXT, PRIMARY KEY (id)) DEFAULT CHARSET=utf8',
     (error,results) => {
       res.redirect('/');
     }
@@ -244,16 +254,38 @@ app.get('/list', (req, res) => {
 });
 
 app.post('/add',(req,res) => {
-const name = req.body.name;
 const listname = req.session.username;
-console.log(name);
+const name_image = req.body.name_image.split(",");
+const name = name_image[0];
+const image = name_image[1];
+const re = '/lunch?ind_flag=1&name=' + name;
   connection.query(
-    'INSERT INTO ' + listname + ' (name) VALUES (?)',//マイランチリストに追加
-    [name],
+    'INSERT INTO ' + listname + ' (name,image) VALUES (?,?)',
+    [name,image],//マイランチリストに追加
     (error,results) => {
-      res.redirect('lunch');
+      res.redirect(re); //パラメータを持たせてリダイレクト
     }
   )
   });
+
+app.post('/delete',(req,res) => {
+  const listname = req.session.username;
+  const name_from = req.body.name_from.split(",");
+  const name = name_from[0]; //ランチ名
+  const from = name_from[1]; //lunch または list
+  re = "";
+  if(from == "lunch"){
+    re = '/lunch?ind_flag=1&name=' + name;
+  }else if(from == "list"){
+    re = '/list';
+  }
+    connection.query(
+      'DELETE FROM ' + listname + ' WHERE name = ?',//マイランチリストから削除
+      [name],
+      (error,results) => {
+        res.redirect(re); //lunchからきたら/lunch,listからきたら/list
+      }
+    )
+    });
 
 app.listen(3000);

@@ -2,43 +2,111 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LunCider</title>
     <link rel="stylesheet" href="/css/stylesheet.css">
+    <link rel="stylesheet" href="/css/responsive.css">
   </head>
   <body>
     <%- include('header'); %>
 
     <div class="top-wrapper"><!--背景画像、テキスト-->
       <div class="container">
-        <h2>LunCiderは、あなたの気分にあった一品料理を提案します</h2>
+          <h2>LunCiderは、あなたの気分にあった一品料理を提案します</h2>
       </div>
     </div>
     
     <div class="main"><!--背景画像、条件-->
       <div class="container">
-        <div class="choice"><!--条件を指定するGUIを設置-->
+        <div class="choice">
+        
           <form method="get" action="/lunch">
-              <b>値段</b><br>
-              <label><input type="radio" name="price" value="0" checked>条件なし</label>
-              <label><input type="radio" name="price" value="2">高い</label>
-              <label><input type="radio" name="price" value="-2">安い</label>
-              <br><br>
+
+            <div class="radio-tile-group">
+              <div class="radio-tile-group-1">
+                <div class="circle">値段</div>
+                <div class="input-container">
+                  <input id="cheap" class="radio-button" type="radio" name="price" value="-2"/>
+                  <div class="radio-tile">
+                    <label for="cheap" class="radio-tile-label">安い</label>
+                  </div>
+                </div>
+            
+                <div class="input-container">
+                  <input id="normal" class="radio-button" type="radio" name="price" value="0" checked/>
+                  <div class="radio-tile">
+                    <label for="normal" class="radio-tile-label">条件なし</label>
+                  </div>
+                </div>
+            
+                <div class="input-container">
+                  <input id="expensive" class="radio-button" type="radio" name="price" value="2"/>
+                  <div class="radio-tile">
+                    <label for="expensive" class="radio-tile-label">高い</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="radio-tile-group-2">
+                <div class="circle">量</div>
+                <div class="input-container">
+                  <input id="small" class="radio-button" type="radio" name="volume" value="-2"/>
+                  <div class="radio-tile">
+                    <label for="small" class="radio-tile-label">少なめ</label>
+                  </div>
+                </div>
+            
+                <div class="input-container">
+                  <input id="normal-2" class="radio-button" type="radio" name="volume" value="0" checked/>
+                  <div class="radio-tile">
+                    <label for="normal-2" class="radio-tile-label">条件なし</label>
+                  </div>
+                </div>
+            
+                <div class="input-container">
+                  <input id="big" class="radio-button" type="radio" name="volume" value="2"/>
+                  <div class="radio-tile">
+                    <label for="big" class="radio-tile-label">ガッツリ</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="check-tile-group">
+              <div class="circle">ジャンル</div>
+              <div class="input-container">
+                <input id="wa" class="check-box" type="checkbox" name="genre" value="1" checked/>
+                <div class="check-tile">
+                  <label for="wa" class="check-tile-label">和食</label>
+                </div>
+              </div>
+          
+              <div class="input-container">
+                <input id="you" class="check-box" type="checkbox" name="genre" value="2" checked/>
+                <div class="check-tile">
+                  <label for="you" class="check-tile-label">洋食</label>
+                </div>
+              </div>
+          
+              <div class="input-container">
+                <input id="chu" class="check-box" type="checkbox" name="genre" value="3" checked/>
+                <div class="check-tile">
+                  <label for="chu" class="check-tile-label">中華</label>
+                </div>
+              </div>
               
-              <b>量</b><br>
-              <label><input type="radio" name="volume" value="0" checked>条件なし</label>
-              <label><input type="radio" name="volume" value="2">ガッツリ</label>
-              <label><input type="radio" name="volume" value="-2">少なめ</label>
-              <br><br>
-              
-              <b>ジャンル</b><br>
-              <label><input type="checkbox" name="genre" value="1" checked>和食</label>
-              <label><input type="checkbox" name="genre" value="2" checked>洋食</label>
-              <label><input type="checkbox" name="genre" value="3" checked>中華</label>
-              <label><input type="checkbox" name="genre" value="4" checked>イタリアン</label>
-              <br><br>
-              <button class="btn" type="submit">この条件で探す</button>
+              <div class="input-container">
+                <input id="ita" class="check-box" type="checkbox" name="genre" value="4" checked/>
+                <div class="check-tile">
+                  <label for="ita" class="check-tile-label">イタリアン</label>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn" type="submit">この条件で探す</button>
           </form>
         </div>
+
       </div>
     </div>
       
